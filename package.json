@@ -13,7 +13,7 @@
   "module": "es/index.js",
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
-    "build": "node tools/build.js",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider node tools/build.js",
     "build-docs": "yarn --cwd www build",
     "deploy-docs": "yarn --cwd www deploy",
     "start": "yarn --cwd www run develop",
