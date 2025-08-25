@@ -1,8 +1,7 @@
 import _extends from "@babel/runtime-corejs3/helpers/esm/extends";
+import _mapInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/map";
 import _objectWithoutPropertiesLoose from "@babel/runtime-corejs3/helpers/esm/objectWithoutPropertiesLoose";
 import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
-var _excluded = ["onSelect", "className", "children"];
-import _mapInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/map";
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
@@ -13,21 +12,27 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 var propTypes = {
   onSelect: PropTypes.func
 };
+
 var Pager = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(Pager, _React$Component);
+
   function Pager() {
     return _React$Component.apply(this, arguments) || this;
   }
+
   var _proto = Pager.prototype;
+
   _proto.render = function render() {
     var _this$props = this.props,
-      onSelect = _this$props.onSelect,
-      className = _this$props.className,
-      children = _this$props.children,
-      props = _objectWithoutPropertiesLoose(_this$props, _excluded);
+        onSelect = _this$props.onSelect,
+        className = _this$props.className,
+        children = _this$props.children,
+        props = _objectWithoutPropertiesLoose(_this$props, ["onSelect", "className", "children"]);
+
     var _splitBsProps = splitBsProps(props),
-      bsProps = _splitBsProps[0],
-      elementProps = _splitBsProps[1];
+        bsProps = _splitBsProps[0],
+        elementProps = _splitBsProps[1];
+
     var classes = getClassSet(bsProps);
     return /*#__PURE__*/React.createElement("ul", _extends({}, elementProps, {
       className: classNames(className, classes)
@@ -37,8 +42,10 @@ var Pager = /*#__PURE__*/function (_React$Component) {
       });
     }));
   };
+
   return Pager;
 }(React.Component);
+
 Pager.propTypes = propTypes;
 Pager.Item = PagerItem;
 export default bsClass('pager', Pager);

@@ -1,9 +1,8 @@
 import _extends from "@babel/runtime-corejs3/helpers/esm/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime-corejs3/helpers/esm/objectWithoutPropertiesLoose";
+import _bindInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/bind";
 import _assertThisInitialized from "@babel/runtime-corejs3/helpers/esm/assertThisInitialized";
 import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
-var _excluded = ["disabled", "previous", "next", "onClick", "className", "style"];
-import _bindInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/bind";
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -22,38 +21,48 @@ var defaultProps = {
   previous: false,
   next: false
 };
+
 var PagerItem = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(PagerItem, _React$Component);
+
   function PagerItem(props, context) {
     var _context;
+
     var _this;
+
     _this = _React$Component.call(this, props, context) || this;
     _this.handleSelect = _bindInstanceProperty(_context = _this.handleSelect).call(_context, _assertThisInitialized(_this));
     return _this;
   }
+
   var _proto = PagerItem.prototype;
+
   _proto.handleSelect = function handleSelect(e) {
     var _this$props = this.props,
-      disabled = _this$props.disabled,
-      onSelect = _this$props.onSelect,
-      eventKey = _this$props.eventKey;
+        disabled = _this$props.disabled,
+        onSelect = _this$props.onSelect,
+        eventKey = _this$props.eventKey;
+
     if (disabled) {
       e.preventDefault();
       return;
     }
+
     if (onSelect) {
       onSelect(eventKey, e);
     }
   };
+
   _proto.render = function render() {
     var _this$props2 = this.props,
-      disabled = _this$props2.disabled,
-      previous = _this$props2.previous,
-      next = _this$props2.next,
-      onClick = _this$props2.onClick,
-      className = _this$props2.className,
-      style = _this$props2.style,
-      props = _objectWithoutPropertiesLoose(_this$props2, _excluded);
+        disabled = _this$props2.disabled,
+        previous = _this$props2.previous,
+        next = _this$props2.next,
+        onClick = _this$props2.onClick,
+        className = _this$props2.className,
+        style = _this$props2.style,
+        props = _objectWithoutPropertiesLoose(_this$props2, ["disabled", "previous", "next", "onClick", "className", "style"]);
+
     delete props.onSelect;
     delete props.eventKey;
     return /*#__PURE__*/React.createElement("li", {
@@ -68,8 +77,10 @@ var PagerItem = /*#__PURE__*/function (_React$Component) {
       onClick: createChainedFunction(onClick, this.handleSelect)
     })));
   };
+
   return PagerItem;
 }(React.Component);
+
 PagerItem.propTypes = propTypes;
 PagerItem.defaultProps = defaultProps;
 export default PagerItem;

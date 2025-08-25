@@ -1,15 +1,12 @@
 import _extends from "@babel/runtime-corejs3/helpers/esm/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime-corejs3/helpers/esm/objectWithoutPropertiesLoose";
 import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
-var _excluded = ["closeLabel", "closeButton", "onHide", "className", "children"];
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
-import CloseButton from './CloseButton';
-
-// TODO: `aria-label` should be `closeLabel`.
+import CloseButton from './CloseButton'; // TODO: `aria-label` should be `closeLabel`.
 
 var propTypes = {
   /**
@@ -18,10 +15,12 @@ var propTypes = {
    * readable.
    */
   closeLabel: PropTypes.string,
+
   /**
    * Specify whether the Component should contain a close button
    */
   closeButton: PropTypes.bool,
+
   /**
    * A Callback fired when the close button is clicked. If used directly inside
    * a Modal component, the onHide will automatically be propagated up to the
@@ -38,24 +37,31 @@ var contextTypes = {
     onHide: PropTypes.func
   })
 };
+
 var ModalHeader = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(ModalHeader, _React$Component);
+
   function ModalHeader() {
     return _React$Component.apply(this, arguments) || this;
   }
+
   var _proto = ModalHeader.prototype;
+
   _proto.render = function render() {
     var _this$props = this.props,
-      closeLabel = _this$props.closeLabel,
-      closeButton = _this$props.closeButton,
-      onHide = _this$props.onHide,
-      className = _this$props.className,
-      children = _this$props.children,
-      props = _objectWithoutPropertiesLoose(_this$props, _excluded);
+        closeLabel = _this$props.closeLabel,
+        closeButton = _this$props.closeButton,
+        onHide = _this$props.onHide,
+        className = _this$props.className,
+        children = _this$props.children,
+        props = _objectWithoutPropertiesLoose(_this$props, ["closeLabel", "closeButton", "onHide", "className", "children"]);
+
     var modal = this.context.$bs_modal;
+
     var _splitBsProps = splitBsProps(props),
-      bsProps = _splitBsProps[0],
-      elementProps = _splitBsProps[1];
+        bsProps = _splitBsProps[0],
+        elementProps = _splitBsProps[1];
+
     var classes = getClassSet(bsProps);
     return /*#__PURE__*/React.createElement("div", _extends({}, elementProps, {
       className: classNames(className, classes)
@@ -64,8 +70,10 @@ var ModalHeader = /*#__PURE__*/function (_React$Component) {
       onClick: createChainedFunction(modal && modal.onHide, onHide)
     }), children);
   };
+
   return ModalHeader;
 }(React.Component);
+
 ModalHeader.propTypes = propTypes;
 ModalHeader.defaultProps = defaultProps;
 ModalHeader.contextTypes = contextTypes;

@@ -1,8 +1,7 @@
 import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
 import _extends from "@babel/runtime-corejs3/helpers/esm/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime-corejs3/helpers/esm/objectWithoutPropertiesLoose";
-var _excluded = ["active", "disabled", "className", "style", "activeLabel", "children"],
-  _excluded2 = ["disabled", "children", "className"];
+
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -23,12 +22,13 @@ var defaultProps = {
 };
 export default function PaginationItem(_ref) {
   var active = _ref.active,
-    disabled = _ref.disabled,
-    className = _ref.className,
-    style = _ref.style,
-    activeLabel = _ref.activeLabel,
-    children = _ref.children,
-    props = _objectWithoutPropertiesLoose(_ref, _excluded);
+      disabled = _ref.disabled,
+      className = _ref.className,
+      style = _ref.style,
+      activeLabel = _ref.activeLabel,
+      children = _ref.children,
+      props = _objectWithoutPropertiesLoose(_ref, ["active", "disabled", "className", "style", "activeLabel", "children"]);
+
   var Component = active || disabled ? 'span' : SafeAnchor;
   return /*#__PURE__*/React.createElement("li", {
     style: style,
@@ -44,23 +44,30 @@ export default function PaginationItem(_ref) {
 }
 PaginationItem.propTypes = propTypes;
 PaginationItem.defaultProps = defaultProps;
+
 function createButton(name, defaultValue, label) {
-  var _class;
+  var _class, _temp;
+
   if (label === void 0) {
     label = name;
   }
-  return _class = /*#__PURE__*/function (_React$Component) {
+
+  return _temp = _class = /*#__PURE__*/function (_React$Component) {
     _inheritsLoose(_class, _React$Component);
+
     function _class() {
       return _React$Component.apply(this, arguments) || this;
     }
+
     var _proto = _class.prototype;
+
     _proto.render = function render() {
       var _this$props = this.props,
-        disabled = _this$props.disabled,
-        children = _this$props.children,
-        className = _this$props.className,
-        props = _objectWithoutPropertiesLoose(_this$props, _excluded2);
+          disabled = _this$props.disabled,
+          children = _this$props.children,
+          className = _this$props.className,
+          props = _objectWithoutPropertiesLoose(_this$props, ["disabled", "children", "className"]);
+
       var Component = disabled ? 'span' : SafeAnchor;
       return /*#__PURE__*/React.createElement("li", _extends({
         "aria-label": label,
@@ -69,11 +76,13 @@ function createButton(name, defaultValue, label) {
         })
       }, props), /*#__PURE__*/React.createElement(Component, null, children || defaultValue));
     };
+
     return _class;
   }(React.Component), _class.displayName = name, _class.propTypes = {
     disabled: PropTypes.bool
-  }, _class;
+  }, _temp;
 }
+
 export var First = createButton('First', "\xAB");
 export var Prev = createButton('Prev', "\u2039");
 export var Ellipsis = createButton('Ellipsis', "\u2026", 'More');

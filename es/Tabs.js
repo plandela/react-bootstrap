@@ -1,9 +1,8 @@
 import _extends from "@babel/runtime-corejs3/helpers/esm/extends";
+import _mapInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/map";
 import _objectWithoutPropertiesLoose from "@babel/runtime-corejs3/helpers/esm/objectWithoutPropertiesLoose";
 import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
-var _excluded = ["id", "onSelect", "animation", "mountOnEnter", "unmountOnExit", "bsClass", "className", "style", "children", "activeKey"];
 import _forEachInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/for-each";
-import _mapInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/map";
 import React from 'react';
 import PropTypes from 'prop-types';
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
@@ -23,10 +22,12 @@ var propTypes = {
    * @controllable onSelect
    */
   activeKey: PropTypes.any,
+
   /**
    * Navigation style
    */
   bsStyle: PropTypes.oneOf(['tabs', 'pills']),
+
   /**
    * Sets a default animation strategy. Use `false` to disable, `true`
    * to enable the default `<Fade>` animation, or a react-transition-group
@@ -34,6 +35,7 @@ var propTypes = {
    */
   animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
   id: requiredForA11y(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+
   /**
    * Callback fired when a Tab is selected.
    *
@@ -47,10 +49,12 @@ var propTypes = {
    * @controllable activeKey
    */
   onSelect: PropTypes.func,
+
   /**
    * Wait until the first "enter" transition to mount tabs (add them to the DOM)
    */
   mountOnEnter: PropTypes.bool,
+
   /**
    * Unmount tabs (remove it from the DOM) when it is no longer visible
    */
@@ -62,50 +66,61 @@ var defaultProps = {
   mountOnEnter: false,
   unmountOnExit: false
 };
+
 function getDefaultActiveKey(children) {
   var defaultActiveKey;
+
   _forEachInstanceProperty(ValidComponentChildren).call(ValidComponentChildren, children, function (child) {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }
   });
+
   return defaultActiveKey;
 }
+
 var Tabs = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(Tabs, _React$Component);
+
   function Tabs() {
     return _React$Component.apply(this, arguments) || this;
   }
+
   var _proto = Tabs.prototype;
+
   _proto.renderTab = function renderTab(child) {
     var _child$props = child.props,
-      title = _child$props.title,
-      eventKey = _child$props.eventKey,
-      disabled = _child$props.disabled,
-      tabClassName = _child$props.tabClassName;
+        title = _child$props.title,
+        eventKey = _child$props.eventKey,
+        disabled = _child$props.disabled,
+        tabClassName = _child$props.tabClassName;
+
     if (title == null) {
       return null;
     }
+
     return /*#__PURE__*/React.createElement(NavItem, {
       eventKey: eventKey,
       disabled: disabled,
       className: tabClassName
     }, title);
   };
+
   _proto.render = function render() {
     var _this$props = this.props,
-      id = _this$props.id,
-      onSelect = _this$props.onSelect,
-      animation = _this$props.animation,
-      mountOnEnter = _this$props.mountOnEnter,
-      unmountOnExit = _this$props.unmountOnExit,
-      bsClass = _this$props.bsClass,
-      className = _this$props.className,
-      style = _this$props.style,
-      children = _this$props.children,
-      _this$props$activeKey = _this$props.activeKey,
-      activeKey = _this$props$activeKey === void 0 ? getDefaultActiveKey(children) : _this$props$activeKey,
-      props = _objectWithoutPropertiesLoose(_this$props, _excluded);
+        id = _this$props.id,
+        onSelect = _this$props.onSelect,
+        animation = _this$props.animation,
+        mountOnEnter = _this$props.mountOnEnter,
+        unmountOnExit = _this$props.unmountOnExit,
+        bsClass = _this$props.bsClass,
+        className = _this$props.className,
+        style = _this$props.style,
+        children = _this$props.children,
+        _this$props$activeKey = _this$props.activeKey,
+        activeKey = _this$props$activeKey === void 0 ? getDefaultActiveKey(children) : _this$props$activeKey,
+        props = _objectWithoutPropertiesLoose(_this$props, ["id", "onSelect", "animation", "mountOnEnter", "unmountOnExit", "bsClass", "className", "style", "children", "activeKey"]);
+
     return /*#__PURE__*/React.createElement(TabContainer, {
       id: id,
       activeKey: activeKey,
@@ -121,8 +136,10 @@ var Tabs = /*#__PURE__*/function (_React$Component) {
       unmountOnExit: unmountOnExit
     }, children)));
   };
+
   return Tabs;
 }(React.Component);
+
 Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 setBsClass('tab', Tabs);

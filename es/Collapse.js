@@ -1,10 +1,11 @@
 import _extends from "@babel/runtime-corejs3/helpers/esm/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime-corejs3/helpers/esm/objectWithoutPropertiesLoose";
-import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
-var _excluded = ["onEnter", "onEntering", "onEntered", "onExit", "onExiting", "className", "children"];
-var _collapseStyles;
-import _parseInt from "@babel/runtime-corejs3/core-js-stable/parse-int";
 import _concatInstanceProperty from "@babel/runtime-corejs3/core-js-stable/instance/concat";
+import _inheritsLoose from "@babel/runtime-corejs3/helpers/esm/inheritsLoose";
+import _parseInt from "@babel/runtime-corejs3/core-js-stable/parse-int";
+
+var _collapseStyles;
+
 import classNames from 'classnames';
 import css from 'dom-helpers/style';
 import React from 'react';
@@ -15,10 +16,9 @@ import createChainedFunction from './utils/createChainedFunction';
 var MARGINS = {
   height: ['marginTop', 'marginBottom'],
   width: ['marginLeft', 'marginRight']
-};
-
-// reading a dimension prop will cause the browser to recalculate,
+}; // reading a dimension prop will cause the browser to recalculate,
 // which will let our animations work
+
 function triggerBrowserReflow(node) {
   node.offsetHeight; // eslint-disable-line no-unused-expressions
 }
@@ -28,55 +28,67 @@ function getDimensionValue(dimension, elem) {
   var margins = MARGINS[dimension];
   return value + _parseInt(css(elem, margins[0]), 10) + _parseInt(css(elem, margins[1]), 10);
 }
+
 var collapseStyles = (_collapseStyles = {}, _collapseStyles[EXITED] = 'collapse', _collapseStyles[EXITING] = 'collapsing', _collapseStyles[ENTERING] = 'collapsing', _collapseStyles[ENTERED] = 'collapse in', _collapseStyles);
 var propTypes = {
   /**
    * Show the component; triggers the expand or collapse animation
    */
   "in": PropTypes.bool,
+
   /**
    * Wait until the first "enter" transition to mount the component (add it to the DOM)
    */
   mountOnEnter: PropTypes.bool,
+
   /**
    * Unmount the component (remove it from the DOM) when it is collapsed
    */
   unmountOnExit: PropTypes.bool,
+
   /**
    * Run the expand animation when the component mounts, if it is initially
    * shown
    */
   appear: PropTypes.bool,
+
   /**
    * Duration of the collapse animation in milliseconds, to ensure that
    * finishing callbacks are fired even if the original browser transition end
    * events are canceled
    */
   timeout: PropTypes.number,
+
   /**
    * Callback fired before the component expands
    */
   onEnter: PropTypes.func,
+
   /**
    * Callback fired after the component starts to expand
    */
   onEntering: PropTypes.func,
+
   /**
    * Callback fired after the component has expanded
    */
   onEntered: PropTypes.func,
+
   /**
    * Callback fired before the component collapses
    */
   onExit: PropTypes.func,
+
   /**
    * Callback fired after the component starts to collapse
    */
   onExiting: PropTypes.func,
+
   /**
    * Callback fired after the component has collapsed
    */
   onExited: PropTypes.func,
+
   /**
    * The dimension used when collapsing, or a function that returns the
    * dimension
@@ -85,6 +97,7 @@ var propTypes = {
    * You will need to supply your own CSS animation for the `.width` CSS class._
    */
   dimension: PropTypes.oneOfType([PropTypes.oneOf(['height', 'width']), PropTypes.func]),
+
   /**
    * Function that returns the height or width of the animating DOM node
    *
@@ -93,6 +106,7 @@ var propTypes = {
    * dimension prop value and the DOM node.
    */
   getDimensionValue: PropTypes.func,
+
   /**
    * ARIA role of collapsible element
    */
@@ -107,58 +121,75 @@ var defaultProps = {
   dimension: 'height',
   getDimensionValue: getDimensionValue
 };
+
 var Collapse = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(Collapse, _React$Component);
+
   function Collapse() {
     var _context;
+
     var _this;
+
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
+
     _this = _React$Component.call.apply(_React$Component, _concatInstanceProperty(_context = [this]).call(_context, args)) || this;
+
     _this.handleEnter = function (elem) {
       elem.style[_this.getDimension()] = '0';
     };
+
     _this.handleEntering = function (elem) {
       var dimension = _this.getDimension();
+
       elem.style[dimension] = _this._getScrollDimensionValue(elem, dimension);
     };
+
     _this.handleEntered = function (elem) {
       elem.style[_this.getDimension()] = null;
     };
+
     _this.handleExit = function (elem) {
       var dimension = _this.getDimension();
+
       elem.style[dimension] = _this.props.getDimensionValue(dimension, elem) + "px";
       triggerBrowserReflow(elem);
     };
+
     _this.handleExiting = function (elem) {
       elem.style[_this.getDimension()] = '0';
     };
+
     return _this;
   }
+
   var _proto = Collapse.prototype;
+
   _proto.getDimension = function getDimension() {
     return typeof this.props.dimension === 'function' ? this.props.dimension() : this.props.dimension;
-  }
-
-  // for testing
+  } // for testing
   ;
+
   _proto._getScrollDimensionValue = function _getScrollDimensionValue(elem, dimension) {
     return elem["scroll" + capitalize(dimension)] + "px";
   }
+  /* -- Expanding -- */
+  ;
 
-  /* -- Expanding -- */;
   _proto.render = function render() {
     var _this2 = this;
+
     var _this$props = this.props,
-      onEnter = _this$props.onEnter,
-      onEntering = _this$props.onEntering,
-      onEntered = _this$props.onEntered,
-      onExit = _this$props.onExit,
-      onExiting = _this$props.onExiting,
-      className = _this$props.className,
-      children = _this$props.children,
-      props = _objectWithoutPropertiesLoose(_this$props, _excluded);
+        onEnter = _this$props.onEnter,
+        onEntering = _this$props.onEntering,
+        onEntered = _this$props.onEntered,
+        onExit = _this$props.onExit,
+        onExiting = _this$props.onExiting,
+        className = _this$props.className,
+        children = _this$props.children,
+        props = _objectWithoutPropertiesLoose(_this$props, ["onEnter", "onEntering", "onEntered", "onExit", "onExiting", "className", "children"]);
+
     delete props.dimension;
     delete props.getDimensionValue;
     var handleEnter = createChainedFunction(this.handleEnter, onEnter);
@@ -179,8 +210,10 @@ var Collapse = /*#__PURE__*/function (_React$Component) {
       }));
     });
   };
+
   return Collapse;
 }(React.Component);
+
 Collapse.propTypes = propTypes;
 Collapse.defaultProps = defaultProps;
 export default Collapse;
